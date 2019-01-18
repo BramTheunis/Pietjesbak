@@ -11,43 +11,58 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name player 1"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="87dp" />
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="87dp"
+        android:text="@string/name_player1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name player 2"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="139dp" />
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="139dp"
+        android:text="@string/name_player2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/namePlayer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
+        android:layout_marginLeft="172dp"
+        android:layout_marginTop="68dp"
         android:inputType="text"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="61dp" />
+        android:hint="Enter username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/namePlayer2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
+        android:layout_marginLeft="172dp"
+        android:layout_marginTop="120dp"
         android:inputType="text"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="113dp" />
+        android:hint="Enter username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="313dp"
-        tools:background="@color/colorPrimaryDark"
-        tools:textColor="@android:color/white"/>
+        android:layout_marginTop="313dp"
+        android:background="@android:color/holo_green_dark"
+        android:text="@string/button_start_game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
