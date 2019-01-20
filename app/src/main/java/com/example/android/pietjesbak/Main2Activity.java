@@ -35,6 +35,9 @@ public class Main2Activity extends AppCompatActivity {
     private Button rollDice;
     private ImageView dice1, dice2, dice3;
 
+    // variabelen voor vastzetten dobbelstenen
+    CheckBox c1, c2, c3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,25 +63,79 @@ public class Main2Activity extends AppCompatActivity {
         dice2 = findViewById(R.id.dice2);
         dice3 = findViewById(R.id.dice3);
 
+        c1 = findViewById(R.id.checkBox1);
+        c2 = findViewById(R.id.checkBox2);
+        c3 = findViewById(R.id.checkBox3);
+
         rollDice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int value1 = randomDiceValue();
-                int value2 = randomDiceValue();
-                int value3 = randomDiceValue();
+                if (c1.isChecked() && c2.isChecked()) {
+                    int value3 = randomDiceValue();
 
-                int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
-                int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
-                int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
+                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
 
-                dice1.setImageResource(res1);
-                dice2.setImageResource(res2);
-                dice3.setImageResource(res3);
+                    dice3.setImageResource(res3);
+
+                } else if (c1.isChecked() && c3.isChecked()) {
+                    int value2 = randomDiceValue();
+
+                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
+
+                    dice2.setImageResource(res2);
+
+                } else if (c2.isChecked() && c3.isChecked()) {
+                    int value1 = randomDiceValue();
+
+                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
+
+                    dice1.setImageResource(res1);
+
+                } else if (c1.isChecked()) {
+                    int value2 = randomDiceValue();
+                    int value3 = randomDiceValue();
+
+                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
+                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
+
+                    dice2.setImageResource(res2);
+                    dice3.setImageResource(res3);
+
+                } else if (c2.isChecked()) {
+                    int value1 = randomDiceValue();
+                    int value3 = randomDiceValue();
+
+                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
+                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
+
+                    dice1.setImageResource(res1);
+                    dice3.setImageResource(res3);
+
+                } else if (c3.isChecked()) {
+                    int value1 = randomDiceValue();
+                    int value2 = randomDiceValue();
+
+                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
+                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
+
+                    dice1.setImageResource(res1);
+                    dice2.setImageResource(res2);
+
+                } else {
+                    int value1 = randomDiceValue();
+                    int value2 = randomDiceValue();
+                    int value3 = randomDiceValue();
+
+                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
+                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
+                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
+
+                    dice1.setImageResource(res1);
+                    dice2.setImageResource(res2);
+                    dice3.setImageResource(res3);
+                }
             }
         });
-
-
-
     }
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
