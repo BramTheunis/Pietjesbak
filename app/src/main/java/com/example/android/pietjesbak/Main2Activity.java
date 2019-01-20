@@ -18,8 +18,8 @@ import java.util.Random;
 
 public class Main2Activity extends AppCompatActivity {
 
+    // declareren variabelen voor shakesensor
     private SensorManager sm;
-
     private float acelVal;
     private float acelLast;
     private float shake;
@@ -30,7 +30,7 @@ public class Main2Activity extends AppCompatActivity {
     TextView name2;
     String st2;
 
-    // variabelen voor te dobbelen
+    // variabelen voor dobbelen
     public static final Random RANDOM = new Random();
     private Button rollDice;
     private ImageView dice1, dice2, dice3;
@@ -76,6 +76,8 @@ public class Main2Activity extends AppCompatActivity {
                 dice3.setImageResource(res3);
             }
         });
+
+
 
     }
 
