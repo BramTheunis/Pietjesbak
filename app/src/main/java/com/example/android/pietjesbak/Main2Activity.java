@@ -160,11 +160,32 @@ public class Main2Activity extends AppCompatActivity {
                 String tp1 = turnPlayer1.getText().toString();
                 int tp1_number = Integer.parseInt(tp1);
 
+                TextView turnPlayer2 = (TextView) findViewById(R.id.turnPlayer2);
+                String tp2 = turnPlayer2.getText().toString();
+                int tp2_number = Integer.parseInt(tp2);
+
                 if (playerOne == true) {
                     tp1_number = tp1_number+1;
                     String tp1_new_text = tp1_number + "";
                     turnPlayer1.setText(tp1_new_text);
+                    if (tp1_number == 3) {
+                        playerOne = false;
+                        playerOneIndicator.setVisibility(View.INVISIBLE);
+                        playerTwoIndicator.setVisibility(View.VISIBLE);
+                    }
+                } else if (playerOne == false) {
+                    tp2_number = tp2_number+1;
+                    String tp2_new_text = tp2_number + "";
+                    turnPlayer2.setText(tp2_new_text);
+                    tp1_number = tp1_number-1;
+                    if (tp2_number-1 == tp1_number) {
+                        // resetfunctie in de plaats zetten
+                        playerOneIndicator.setVisibility(View.VISIBLE);
+                        playerTwoIndicator.setVisibility(View.INVISIBLE);
+                    }
                 }
+
+
             }
         });
     }
