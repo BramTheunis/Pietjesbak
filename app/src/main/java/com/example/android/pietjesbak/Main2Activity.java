@@ -13,6 +13,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class Main2Activity extends AppCompatActivity {
@@ -37,14 +39,30 @@ public class Main2Activity extends AppCompatActivity {
     // variabelen voor vastzetten dobbelstenen
     CheckBox c1, c2, c3;
 
+    // variabelen voor spelers
+    TextView scoreOne, scoreTwo, tempScore, turnPlayer1;
+
+    private static int SCORE_PLAYER_ONE = 0;
+    private static int SCORE_PLAYER_TWO = 0;
+
+    private static int DICE_ROLL = 0;
+    private static int TEMP_SCORE = 0;
+
+    private Button passTurn;
+
+    ImageView playerOneIndicator, playerTwoIndicator;
+
+    boolean playerOne = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        initializeWidgets();
+
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-
         acelVal = SensorManager.GRAVITY_EARTH;
         acelLast = SensorManager.GRAVITY_EARTH;
         shake = 0.00f;
@@ -65,6 +83,9 @@ public class Main2Activity extends AppCompatActivity {
         c1 = findViewById(R.id.checkBox1);
         c2 = findViewById(R.id.checkBox2);
         c3 = findViewById(R.id.checkBox3);
+
+        // variabele turn
+
 
         rollDice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,8 +154,28 @@ public class Main2Activity extends AppCompatActivity {
                     dice2.setImageResource(res2);
                     dice3.setImageResource(res3);
                 }
+
+                // beurt mechanisme
+                TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
+                String tp1 = turnPlayer1.getText().toString();
+                int tp1_number = Integer.parseInt(tp1);
+
+                if (playerOne == true) {
+                    tp1_number = tp1_number+1;
+                    String tp1_new_text = tp1_number + "";
+                    turnPlayer1.setText(tp1_new_text);
+                }
             }
         });
+    }
+
+    private void initializeWidgets() {
+        playerOneIndicator = (ImageView) findViewById(R.id.imageViewPlayerOne);
+        playerTwoIndicator = (ImageView) findViewById(R.id.imageViewPlayerTwo);
+        passTurn = (Button) findViewById(R.id.passTurn);
+        turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
+        scoreOne = (TextView) findViewById(R.id.scoreSpeler1);
+        scoreTwo = (TextView) findViewById(R.id.scoreSpeler2);
     }
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
