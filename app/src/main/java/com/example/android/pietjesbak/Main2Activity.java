@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.content.Intent;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -67,6 +69,9 @@ public class Main2Activity extends AppCompatActivity {
 
     Integer tp1_number;
     Integer tp2_number;
+
+    Integer sp1_number;
+    Integer sp2_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +216,7 @@ public class Main2Activity extends AppCompatActivity {
                         playerOneIndicator.setVisibility(View.VISIBLE);
                         playerTwoIndicator.setVisibility(View.INVISIBLE);
                         newRound();
+                        winner();
                     }
                 }
             }
@@ -228,6 +234,7 @@ public class Main2Activity extends AppCompatActivity {
                     playerOneIndicator.setVisibility(View.VISIBLE);
                     playerTwoIndicator.setVisibility(View.INVISIBLE);
                     newRound();
+                    winner();
                 }
             }
         });
@@ -370,6 +377,7 @@ public class Main2Activity extends AppCompatActivity {
                         playerOneIndicator.setVisibility(View.VISIBLE);
                         playerTwoIndicator.setVisibility(View.INVISIBLE);
                         newRound();
+                        winner();
                     }
                 }
             }
@@ -439,11 +447,11 @@ public class Main2Activity extends AppCompatActivity {
     public void newRound() {
         TextView streepjesPlayer1 = (TextView) findViewById(R.id.streepjesSpeler1);
         String sp1 = streepjesPlayer1.getText().toString();
-        int sp1_number = Integer.parseInt(sp1);
+        sp1_number = Integer.parseInt(sp1);
 
         TextView streepjesPlayer2 = (TextView) findViewById(R.id.streepjesSpeler2);
         String sp2 = streepjesPlayer2.getText().toString();
-        int sp2_number = Integer.parseInt(sp2);
+        sp2_number = Integer.parseInt(sp2);
 
         if (totalScore1 > totalScore2) {
             sp1_number = sp1_number - 1;
@@ -468,7 +476,6 @@ public class Main2Activity extends AppCompatActivity {
 
     public void reset() {
 
-
         totalScore1 = 0;
         String score1Text = totalScore1 + "";
         TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
@@ -490,5 +497,20 @@ public class Main2Activity extends AppCompatActivity {
         turnPlayer2.setText(tp2_new_text);
 
         playerOne = true;
+    }
+
+    public void winner() {
+
+        if (sp1_number == 0) {
+            Toast.makeText(Main2Activity.this, "Congratulations player 1", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (sp2_number == 0) {
+            Toast.makeText(Main2Activity.this, "Congratulations player 2", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 }
