@@ -248,7 +248,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-            if (shake > 16) {
+            if (shake > 12) {
                 if (c1.isChecked() && c2.isChecked()) {
                     value3 = randomDiceValue();
 
