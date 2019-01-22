@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -276,6 +278,35 @@ public class Main2Activity extends AppCompatActivity {
                     dice1.setImageResource(res1);
                     dice2.setImageResource(res2);
                     dice3.setImageResource(res3);
+                }
+
+                TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
+                String tp1 = turnPlayer1.getText().toString();
+                int tp1_number = Integer.parseInt(tp1);
+
+                TextView turnPlayer2 = (TextView) findViewById(R.id.turnPlayer2);
+                String tp2 = turnPlayer2.getText().toString();
+                int tp2_number = Integer.parseInt(tp2);
+
+                if (playerOne == true) {
+                    tp1_number = tp1_number+1;
+                    String tp1_new_text = tp1_number + "";
+                    turnPlayer1.setText(tp1_new_text);
+                    if (tp1_number == 3) {
+                        playerOne = false;
+                        playerOneIndicator.setVisibility(View.INVISIBLE);
+                        playerTwoIndicator.setVisibility(View.VISIBLE);
+                    }
+                } else if (playerOne == false) {
+                    tp2_number = tp2_number+1;
+                    String tp2_new_text = tp2_number + "";
+                    turnPlayer2.setText(tp2_new_text);
+                    tp1_number = tp1_number-1;
+                    if (tp2_number-1 == tp1_number) {
+                        // resetfunctie in de plaats zetten
+                        playerOneIndicator.setVisibility(View.VISIBLE);
+                        playerTwoIndicator.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         }
