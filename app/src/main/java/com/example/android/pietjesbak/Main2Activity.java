@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -62,6 +64,9 @@ public class Main2Activity extends AppCompatActivity {
 
     Integer totalScore1;
     Integer totalScore2;
+
+    Integer tp1_number;
+    Integer tp2_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,18 +174,19 @@ public class Main2Activity extends AppCompatActivity {
                 // beurt mechanisme
                 TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
                 String tp1 = turnPlayer1.getText().toString();
-                int tp1_number = Integer.parseInt(tp1);
+                tp1_number = Integer.parseInt(tp1);
 
                 TextView turnPlayer2 = (TextView) findViewById(R.id.turnPlayer2);
                 String tp2 = turnPlayer2.getText().toString();
-                int tp2_number = Integer.parseInt(tp2);
+                tp2_number = Integer.parseInt(tp2);
 
                 if (playerOne == true) {
                     tp1_number = tp1_number+1;
                     String tp1_new_text = tp1_number + "";
                     turnPlayer1.setText(tp1_new_text);
 
-                    String score1Text = score1 + score2 + score3 + "";
+                    totalScore1 = score1 + score2 + score3;
+                    String score1Text = totalScore1 + "";
                     TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
                     scorePlayer1.setText(score1Text);
 
@@ -195,7 +201,8 @@ public class Main2Activity extends AppCompatActivity {
                     turnPlayer2.setText(tp2_new_text);
                     tp1_number = tp1_number-1;
 
-                    String score2Text = score1 + score2 + score3 + "";
+                    totalScore2 = score1 + score2 + score3;
+                    String score2Text = totalScore2 + "";
                     TextView scorePlayer2 = (TextView) findViewById(R.id.scoreSpeler2);
                     scorePlayer2.setText(score2Text);
 
@@ -203,6 +210,7 @@ public class Main2Activity extends AppCompatActivity {
                         // resetfunctie in de plaats zetten
                         playerOneIndicator.setVisibility(View.VISIBLE);
                         playerTwoIndicator.setVisibility(View.INVISIBLE);
+                        newRound();
                     }
                 }
             }
@@ -215,6 +223,11 @@ public class Main2Activity extends AppCompatActivity {
                     playerOne = false;
                     playerOneIndicator.setVisibility(View.INVISIBLE);
                     playerTwoIndicator.setVisibility(View.VISIBLE);
+                } else {
+                    playerOne = true;
+                    playerOneIndicator.setVisibility(View.VISIBLE);
+                    playerTwoIndicator.setVisibility(View.INVISIBLE);
+                    newRound();
                 }
             }
         });
@@ -320,18 +333,19 @@ public class Main2Activity extends AppCompatActivity {
 
                 TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
                 String tp1 = turnPlayer1.getText().toString();
-                int tp1_number = Integer.parseInt(tp1);
+                tp1_number = Integer.parseInt(tp1);
 
                 TextView turnPlayer2 = (TextView) findViewById(R.id.turnPlayer2);
                 String tp2 = turnPlayer2.getText().toString();
-                int tp2_number = Integer.parseInt(tp2);
+                tp2_number = Integer.parseInt(tp2);
 
                 if (playerOne == true) {
                     tp1_number = tp1_number+1;
                     String tp1_new_text = tp1_number + "";
                     turnPlayer1.setText(tp1_new_text);
 
-                    String score1Text = score1 + score2 + score3 + "";
+                    totalScore1 = score1 + score2 + score3;
+                    String score1Text = totalScore1 + "";
                     TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
                     scorePlayer1.setText(score1Text);
 
@@ -346,7 +360,8 @@ public class Main2Activity extends AppCompatActivity {
                     turnPlayer2.setText(tp2_new_text);
                     tp1_number = tp1_number-1;
 
-                    String score2Text = score1 + score2 + score3 + "";
+                    totalScore2 = score1 + score2 + score3;
+                    String score2Text = totalScore2 + "";
                     TextView scorePlayer2 = (TextView) findViewById(R.id.scoreSpeler2);
                     scorePlayer2.setText(score2Text);
 
@@ -354,6 +369,7 @@ public class Main2Activity extends AppCompatActivity {
                         // resetfunctie in de plaats zetten
                         playerOneIndicator.setVisibility(View.VISIBLE);
                         playerTwoIndicator.setVisibility(View.INVISIBLE);
+                        newRound();
                     }
                 }
             }
@@ -420,5 +436,59 @@ public class Main2Activity extends AppCompatActivity {
         return score3;
     }
 
+    public void newRound() {
+        TextView streepjesPlayer1 = (TextView) findViewById(R.id.streepjesSpeler1);
+        String sp1 = streepjesPlayer1.getText().toString();
+        int sp1_number = Integer.parseInt(sp1);
 
+        TextView streepjesPlayer2 = (TextView) findViewById(R.id.streepjesSpeler2);
+        String sp2 = streepjesPlayer2.getText().toString();
+        int sp2_number = Integer.parseInt(sp2);
+
+        if (totalScore1 > totalScore2) {
+            sp1_number = sp1_number - 1;
+            String sp1_new_text = sp1_number + "";
+            streepjesPlayer1.setText(sp1_new_text);
+        } else if (totalScore1 < totalScore2) {
+            sp2_number = sp2_number - 1;
+            String sp2_new_text = sp2_number + "";
+            streepjesPlayer2.setText(sp2_new_text);
+        }
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                reset();
+            }
+        };
+
+        Handler h = new Handler();
+        h.postDelayed(r, 3000);
+
+    }
+
+    public void reset() {
+
+
+        totalScore1 = 0;
+        String score1Text = totalScore1 + "";
+        TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
+        scorePlayer1.setText(score1Text);
+
+        tp1_number = 0;
+        String tp1_new_text = tp1_number + "";
+        TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
+        turnPlayer1.setText(tp1_new_text);
+
+        totalScore2 = 0;
+        String score2Text = totalScore2 + "";
+        TextView scorePlayer2 = (TextView) findViewById(R.id.scoreSpeler2);
+        scorePlayer2.setText(score2Text);
+
+        tp2_number = 0;
+        String tp2_new_text = tp2_number + "";
+        TextView turnPlayer2 = (TextView) findViewById(R.id.turnPlayer2);
+        turnPlayer2.setText(tp2_new_text);
+
+        playerOne = true;
+    }
 }
