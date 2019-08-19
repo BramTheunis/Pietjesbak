@@ -481,11 +481,11 @@ public class Main2Activity extends AppCompatActivity {
         String sp2 = streepjesPlayer2.getText().toString();
         sp2_number = Integer.parseInt(sp2);
 
-        if (showScore1 > showScore2) {
+        if (totalScore1 > totalScore2) {
             sp1_number = sp1_number - 1;
             String sp1_new_text = sp1_number + "";
             streepjesPlayer1.setText(sp1_new_text);
-        } else if (showScore1 < showScore2) {
+        } else if (totalScore1 < totalScore2) {
             sp2_number = sp2_number - 1;
             String sp2_new_text = sp2_number + "";
             streepjesPlayer2.setText(sp2_new_text);
