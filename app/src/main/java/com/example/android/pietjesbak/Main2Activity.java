@@ -67,6 +67,9 @@ public class Main2Activity extends AppCompatActivity {
     Integer totalScore1;
     Integer totalScore2;
 
+    Integer showScore1;
+    Integer showScore2;
+
     Integer tp1_number;
     Integer tp2_number;
 
@@ -190,8 +193,20 @@ public class Main2Activity extends AppCompatActivity {
                     String tp1_new_text = tp1_number + "";
                     turnPlayer1.setText(tp1_new_text);
 
+                    // the score that shows
+                    showScore1 = score1 + score2 + score3;
+                    // the score that decides the winner
                     totalScore1 = score1 + score2 + score3;
-                    String score1Text = totalScore1 + "";
+                    if (totalScore1 == 300){
+                        totalScore1 = 1000;
+                    }
+                    else if(totalScore1 == 69) {
+                        totalScore1 = 900;
+                    }
+                    else if (score1 == score2 && score2 == score3) {
+                        totalScore1 = score1 + score2 + score3 + 260;
+                    }
+                    String score1Text = showScore1 + "";
                     TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
                     scorePlayer1.setText(score1Text);
 
@@ -206,8 +221,20 @@ public class Main2Activity extends AppCompatActivity {
                     turnPlayer2.setText(tp2_new_text);
                     tp1_number = tp1_number-1;
 
+                    // the score that shows
+                    showScore2 = score1 + score2 + score3;
+                    // the score that decides the winner
                     totalScore2 = score1 + score2 + score3;
-                    String score2Text = totalScore2 + "";
+                    if (totalScore2 == 300){
+                        totalScore2 = 1000;
+                    }
+                    else if(totalScore2 == 69) {
+                        totalScore2 = 900;
+                    }
+                    else if (score1 == score2 && score2 == score3) {
+                        totalScore2 = score1 + score2 + score3 + 260;
+                    }
+                    String score2Text = showScore2 + "";
                     TextView scorePlayer2 = (TextView) findViewById(R.id.scoreSpeler2);
                     scorePlayer2.setText(score2Text);
 
@@ -334,7 +361,7 @@ public class Main2Activity extends AppCompatActivity {
                     dice3.setImageResource(res3);
                 }
 
-                drieApen();
+
                 howMuch1();
                 howMuch2();
                 howMuch3();
@@ -454,11 +481,11 @@ public class Main2Activity extends AppCompatActivity {
         String sp2 = streepjesPlayer2.getText().toString();
         sp2_number = Integer.parseInt(sp2);
 
-        if (totalScore1 > totalScore2) {
+        if (showScore1 > showScore2) {
             sp1_number = sp1_number - 1;
             String sp1_new_text = sp1_number + "";
             streepjesPlayer1.setText(sp1_new_text);
-        } else if (totalScore1 < totalScore2) {
+        } else if (showScore1 < showScore2) {
             sp2_number = sp2_number - 1;
             String sp2_new_text = sp2_number + "";
             streepjesPlayer2.setText(sp2_new_text);
@@ -477,8 +504,8 @@ public class Main2Activity extends AppCompatActivity {
 
     public void reset() {
 
-        totalScore1 = 0;
-        String score1Text = totalScore1 + "";
+        showScore1 = 0;
+        String score1Text = showScore1 + "";
         TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
         scorePlayer1.setText(score1Text);
 
@@ -487,8 +514,8 @@ public class Main2Activity extends AppCompatActivity {
         TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
         turnPlayer1.setText(tp1_new_text);
 
-        totalScore2 = 0;
-        String score2Text = totalScore2 + "";
+        showScore2 = 0;
+        String score2Text = showScore2 + "";
         TextView scorePlayer2 = (TextView) findViewById(R.id.scoreSpeler2);
         scorePlayer2.setText(score2Text);
 
