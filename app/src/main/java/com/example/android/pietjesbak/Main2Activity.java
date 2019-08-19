@@ -334,6 +334,7 @@ public class Main2Activity extends AppCompatActivity {
                     dice3.setImageResource(res3);
                 }
 
+                drieApen();
                 howMuch1();
                 howMuch2();
                 howMuch3();

@@ -5,4 +5,6 @@
     <string name="button_start_game">Start game</string>
     <string name="testActivity2">Activity 2</string>
     <string name="beginScore">0</string>
+    <string name="enter_username">Enter username</string>
+    <string name="enter_username">Enter username</string>
 </resources>
