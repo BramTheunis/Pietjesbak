@@ -281,21 +281,21 @@ public class Main2Activity extends AppCompatActivity {
 
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
-        @Override
-        public void onSensorChanged(SensorEvent sensorEvent) {
+                @Override
+                public void onSensorChanged(SensorEvent sensorEvent) {
 
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
+                    float x = sensorEvent.values[0];
+                    float y = sensorEvent.values[1];
+                    float z = sensorEvent.values[2];
 
-            acelLast = acelVal;
-            acelVal = (float) Math.sqrt((double) (x*x + y*y + z*z));
-            float delta = acelVal - acelLast;
-            shake = shake * 0.9f + delta;
+                    acelLast = acelVal;
+                    acelVal = (float) Math.sqrt((double) (x*x + y*y + z*z));
+                    float delta = acelVal - acelLast;
+                    shake = shake * 0.9f + delta;
 
 
 
-            if (shake > 12) {
+                    if (shake > 12) {
                 if (c1.isChecked() && c2.isChecked()) {
                     value3 = randomDiceValue();
 
@@ -361,11 +361,11 @@ public class Main2Activity extends AppCompatActivity {
                     dice3.setImageResource(res3);
                 }
 
-
                 howMuch1();
                 howMuch2();
                 howMuch3();
 
+                // beurt mechanisme
                 TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
                 String tp1 = turnPlayer1.getText().toString();
                 tp1_number = Integer.parseInt(tp1);
@@ -379,8 +379,20 @@ public class Main2Activity extends AppCompatActivity {
                     String tp1_new_text = tp1_number + "";
                     turnPlayer1.setText(tp1_new_text);
 
+                    // the score that shows
+                    showScore1 = score1 + score2 + score3;
+                    // the score that decides the winner
                     totalScore1 = score1 + score2 + score3;
-                    String score1Text = totalScore1 + "";
+                    if (totalScore1 == 300){
+                        totalScore1 = 1000;
+                    }
+                    else if(totalScore1 == 69) {
+                        totalScore1 = 900;
+                    }
+                    else if (score1 == score2 && score2 == score3) {
+                        totalScore1 = score1 + score2 + score3 + 260;
+                    }
+                    String score1Text = showScore1 + "";
                     TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
                     scorePlayer1.setText(score1Text);
 
@@ -395,8 +407,20 @@ public class Main2Activity extends AppCompatActivity {
                     turnPlayer2.setText(tp2_new_text);
                     tp1_number = tp1_number-1;
 
+                    // the score that shows
+                    showScore2 = score1 + score2 + score3;
+                    // the score that decides the winner
                     totalScore2 = score1 + score2 + score3;
-                    String score2Text = totalScore2 + "";
+                    if (totalScore2 == 300){
+                        totalScore2 = 1000;
+                    }
+                    else if(totalScore2 == 69) {
+                        totalScore2 = 900;
+                    }
+                    else if (score1 == score2 && score2 == score3) {
+                        totalScore2 = score1 + score2 + score3 + 260;
+                    }
+                    String score2Text = showScore2 + "";
                     TextView scorePlayer2 = (TextView) findViewById(R.id.scoreSpeler2);
                     scorePlayer2.setText(score2Text);
 
