@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:5071570141:android:35549814f68c0e7d",
+        "android_client_info": {
+          "package_name": "com.example.android.pietjesbak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5071570141-l543o4kht691n1f5t8o0iagh5i2k9sep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.pietjesbak",
+            "certificate_hash": "4ef9897e0cfff361e7240b03d365da2dba59e648"
+          }
+        },
+        {
+          "client_id": "5071570141-bg31i6kp78cd4et6mceupjvlblneasgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6yJS-Vx_NeFaNgzdPbsaynrsCfMq-6kw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5071570141-bg31i6kp78cd4et6mceupjvlblneasgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:5071570141:android:50e1e1d347c9df88",
         "android_client_info": {
           "package_name": "info.pietjesbak.firebase"
