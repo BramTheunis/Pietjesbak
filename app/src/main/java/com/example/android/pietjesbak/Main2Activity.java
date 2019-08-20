@@ -278,7 +278,148 @@ public class Main2Activity extends AppCompatActivity {
         scoreTwo = (TextView) findViewById(R.id.scoreSpeler2);
     }
 
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (c1.isChecked() && c2.isChecked()) {
+                value3 = randomDiceValue();
 
+                int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
+
+                dice3.setImageResource(res3);
+
+            } else if (c1.isChecked() && c3.isChecked()) {
+                value2 = randomDiceValue();
+
+                int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
+
+                dice2.setImageResource(res2);
+
+            } else if (c2.isChecked() && c3.isChecked()) {
+                value1 = randomDiceValue();
+
+                int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
+
+                dice1.setImageResource(res1);
+
+            } else if (c1.isChecked()) {
+                value2 = randomDiceValue();
+                value3 = randomDiceValue();
+
+                int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
+                int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
+
+                dice2.setImageResource(res2);
+                dice3.setImageResource(res3);
+
+            } else if (c2.isChecked()) {
+                value1 = randomDiceValue();
+                value3 = randomDiceValue();
+
+                int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
+                int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
+
+                dice1.setImageResource(res1);
+                dice3.setImageResource(res3);
+
+            } else if (c3.isChecked()) {
+                value1 = randomDiceValue();
+                value2 = randomDiceValue();
+
+                int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
+                int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
+
+                dice1.setImageResource(res1);
+                dice2.setImageResource(res2);
+
+            } else {
+                value1 = randomDiceValue();
+                value2 = randomDiceValue();
+                value3 = randomDiceValue();
+
+                int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
+                int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
+                int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
+
+                dice1.setImageResource(res1);
+                dice2.setImageResource(res2);
+                dice3.setImageResource(res3);
+            }
+
+            howMuch1();
+            howMuch2();
+            howMuch3();
+
+            // beurt mechanisme
+            TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
+            String tp1 = turnPlayer1.getText().toString();
+            tp1_number = Integer.parseInt(tp1);
+
+            TextView turnPlayer2 = (TextView) findViewById(R.id.turnPlayer2);
+            String tp2 = turnPlayer2.getText().toString();
+            tp2_number = Integer.parseInt(tp2);
+
+            if (playerOne == true) {
+                tp1_number = tp1_number+1;
+                String tp1_new_text = tp1_number + "";
+                turnPlayer1.setText(tp1_new_text);
+
+                // the score that shows
+                showScore1 = score1 + score2 + score3;
+                // the score that decides the winner
+                totalScore1 = score1 + score2 + score3;
+                if (totalScore1 == 300){
+                    totalScore1 = 1000;
+                }
+                else if(totalScore1 == 69) {
+                    totalScore1 = 900;
+                }
+                else if (score1 == score2 && score2 == score3) {
+                    totalScore1 = score1 + score2 + score3 + 260;
+                }
+                String score1Text = showScore1 + "";
+                TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
+                scorePlayer1.setText(score1Text);
+
+                if (tp1_number == 3) {
+                    playerOne = false;
+                    playerOneIndicator.setVisibility(View.INVISIBLE);
+                    playerTwoIndicator.setVisibility(View.VISIBLE);
+                }
+            } else if (playerOne == false) {
+                tp2_number = tp2_number+1;
+                String tp2_new_text = tp2_number + "";
+                turnPlayer2.setText(tp2_new_text);
+                tp1_number = tp1_number-1;
+
+                // the score that shows
+                showScore2 = score1 + score2 + score3;
+                // the score that decides the winner
+                totalScore2 = score1 + score2 + score3;
+                if (totalScore2 == 300){
+                    totalScore2 = 1000;
+                }
+                else if(totalScore2 == 69) {
+                    totalScore2 = 900;
+                }
+                else if (score1 == score2 && score2 == score3) {
+                    totalScore2 = score1 + score2 + score3 + 260;
+                }
+                String score2Text = showScore2 + "";
+                TextView scorePlayer2 = (TextView) findViewById(R.id.scoreSpeler2);
+                scorePlayer2.setText(score2Text);
+
+                if (tp2_number-1 == tp1_number) {
+                    // resetfunctie in de plaats zetten
+                    playerOneIndicator.setVisibility(View.VISIBLE);
+                    playerTwoIndicator.setVisibility(View.INVISIBLE);
+                    newRound();
+                    winner();
+                }
+            }
+        }
+    };
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
                 @Override
@@ -296,144 +437,15 @@ public class Main2Activity extends AppCompatActivity {
 
 
                     if (shake > 12) {
-                if (c1.isChecked() && c2.isChecked()) {
-                    value3 = randomDiceValue();
-
-                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
-
-                    dice3.setImageResource(res3);
-
-                } else if (c1.isChecked() && c3.isChecked()) {
-                    value2 = randomDiceValue();
-
-                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
-
-                    dice2.setImageResource(res2);
-
-                } else if (c2.isChecked() && c3.isChecked()) {
-                    value1 = randomDiceValue();
-
-                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
-
-                    dice1.setImageResource(res1);
-
-                } else if (c1.isChecked()) {
-                    value2 = randomDiceValue();
-                    value3 = randomDiceValue();
-
-                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
-                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
-
-                    dice2.setImageResource(res2);
-                    dice3.setImageResource(res3);
-
-                } else if (c2.isChecked()) {
-                    value1 = randomDiceValue();
-                    value3 = randomDiceValue();
-
-                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
-                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
-
-                    dice1.setImageResource(res1);
-                    dice3.setImageResource(res3);
-
-                } else if (c3.isChecked()) {
-                    value1 = randomDiceValue();
-                    value2 = randomDiceValue();
-
-                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
-                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
-
-                    dice1.setImageResource(res1);
-                    dice2.setImageResource(res2);
-
-                } else {
-                    value1 = randomDiceValue();
-                    value2 = randomDiceValue();
-                    value3 = randomDiceValue();
-
-                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.android.pietjesbak");
-                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.android.pietjesbak");
-                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.android.pietjesbak");
-
-                    dice1.setImageResource(res1);
-                    dice2.setImageResource(res2);
-                    dice3.setImageResource(res3);
-                }
-
-                howMuch1();
-                howMuch2();
-                howMuch3();
-
-                // beurt mechanisme
-                TextView turnPlayer1 = (TextView) findViewById(R.id.turnPlayer1);
-                String tp1 = turnPlayer1.getText().toString();
-                tp1_number = Integer.parseInt(tp1);
-
-                TextView turnPlayer2 = (TextView) findViewById(R.id.turnPlayer2);
-                String tp2 = turnPlayer2.getText().toString();
-                tp2_number = Integer.parseInt(tp2);
-
-                if (playerOne == true) {
-                    tp1_number = tp1_number+1;
-                    String tp1_new_text = tp1_number + "";
-                    turnPlayer1.setText(tp1_new_text);
-
-                    // the score that shows
-                    showScore1 = score1 + score2 + score3;
-                    // the score that decides the winner
-                    totalScore1 = score1 + score2 + score3;
-                    if (totalScore1 == 300){
-                        totalScore1 = 1000;
-                    }
-                    else if(totalScore1 == 69) {
-                        totalScore1 = 900;
-                    }
-                    else if (score1 == score2 && score2 == score3) {
-                        totalScore1 = score1 + score2 + score3 + 260;
-                    }
-                    String score1Text = showScore1 + "";
-                    TextView scorePlayer1 = (TextView) findViewById(R.id.scoreSpeler1);
-                    scorePlayer1.setText(score1Text);
-
-                    if (tp1_number == 3) {
-                        playerOne = false;
-                        playerOneIndicator.setVisibility(View.INVISIBLE);
-                        playerTwoIndicator.setVisibility(View.VISIBLE);
-                    }
-                } else if (playerOne == false) {
-                    tp2_number = tp2_number+1;
-                    String tp2_new_text = tp2_number + "";
-                    turnPlayer2.setText(tp2_new_text);
-                    tp1_number = tp1_number-1;
-
-                    // the score that shows
-                    showScore2 = score1 + score2 + score3;
-                    // the score that decides the winner
-                    totalScore2 = score1 + score2 + score3;
-                    if (totalScore2 == 300){
-                        totalScore2 = 1000;
-                    }
-                    else if(totalScore2 == 69) {
-                        totalScore2 = 900;
-                    }
-                    else if (score1 == score2 && score2 == score3) {
-                        totalScore2 = score1 + score2 + score3 + 260;
-                    }
-                    String score2Text = showScore2 + "";
-                    TextView scorePlayer2 = (TextView) findViewById(R.id.scoreSpeler2);
-                    scorePlayer2.setText(score2Text);
-
-                    if (tp2_number-1 == tp1_number) {
-                        // resetfunctie in de plaats zetten
-                        playerOneIndicator.setVisibility(View.VISIBLE);
-                        playerTwoIndicator.setVisibility(View.INVISIBLE);
-                        newRound();
-                        winner();
-                    }
-                }
+                        try {
+                            handler.removeCallbacks(runnable);
+                            handler.postDelayed(runnable, 1000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
             }
         }
+
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
